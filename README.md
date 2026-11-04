@@ -26,7 +26,7 @@ DeepSeek Harness 的回复优化插件：输入框里一个「说人话」开关
 
 ## 效果
 
-测试环境：DeepSeek Harness `desktop` profile、headless 运行、模型 `cmc/deepseek/deepseek-v4.1-flash`（high），2026-11-04。同一提示词、同一工作区，只切换开关。
+测试环境：DeepSeek Harness `desktop` profile、headless 运行、模型 `command code/deepseek-v4.1-flash（high）`，2026-11-04。同一提示词、同一工作区，只切换开关。
 
 ### 输出对比
 
