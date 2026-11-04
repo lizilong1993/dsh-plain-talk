@@ -184,7 +184,7 @@ The repository keeps runtime and documentation only: `dsh/` (host), `lib/` (brow
 npm pack --dry-run
 ```
 
-The current tarball is **14 files / 30.9 kB** (`npm pack --dry-run`, 2026-11-04); re-check after any change so screenshots or test data do not slip in.
+The current tarball is **14 files / 31.0 kB** (`npm pack --dry-run`, 2026-11-04); re-check after any change so screenshots or test data do not slip in.
 
 5. With 2FA enabled, a classic token is rejected with 403. Use an Automation token or a Granular token with "Bypass 2FA":
 
