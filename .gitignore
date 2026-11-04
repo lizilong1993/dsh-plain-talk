@@ -1,0 +1,4 @@
+node_modules/
+*.log
+scripts/bench-result.json
+.DS_Store

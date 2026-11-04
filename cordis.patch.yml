@@ -1,0 +1,5 @@
+# dsh-plain-talk bundle patch: one host row. The browser half is declared by
+# package.json `dsh.client` and served by the Harness, so it needs no row here.
+- insert:
+    - id: plain-talk
+      name: dsh-plain-talk

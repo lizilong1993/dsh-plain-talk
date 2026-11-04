@@ -1,0 +1,56 @@
+{
+  "name": "dsh-plain-talk",
+  "version": "0.1.0",
+  "description": "Composer toggle that shapes replies: conclusion first, inline quotes, no cross-turn references",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "reply",
+    "readability",
+    "concision",
+    "composer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lizilong1993/dsh-plain-talk.git"
+  },
+  "homepage": "https://github.com/lizilong1993/dsh-plain-talk",
+  "bugs": {
+    "url": "https://github.com/lizilong1993/dsh-plain-talk/issues"
+  },
+  "files": [
+    "dsh",
+    "lib",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "README.en.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": "./dsh/index.js",
+    "./client": "./lib/client.js",
+    "./rules": "./dsh/rules.js",
+    "./check": "./dsh/check.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  }
+}
