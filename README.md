@@ -135,7 +135,7 @@ DeepSeek Harness 的回复优化插件：输入框里一个「说人话」开关
 - 三个场景里，输出 token 两组下降（−42%、−55%），一组上升（+10%，因为多跑了一次自检回合）。**插件不保证每个场景都更省 token。**
 - 输入侧固定多出规则段（约 +590 token/步），回合越多总成本越高；短问答里这笔开销占比明显。
 - 另有一个调查类场景 B：关闭侧在 24 次工具调用后提前结束、只回了 87 字，属于无效对照，已从表格剔除；开启侧正常输出 867 字。样本量小，不做结论。
-- 复现：`node scripts/bench.mjs`（需要本机 `dsh`、headless profile 与同一模型）。
+- 复现方式：同一模型、同一提示词、同一工作区，只在输入框切换开关各跑一次；词汇清单在两侧开始前清空。
 
 ## 安装
 
@@ -214,20 +214,15 @@ dsh plugin --profile desktop add ./dsh-plain-talk
 - 代号识别是启发式：`M11`、`dev-1200`、`c590` 会被标记；纯英文项目名、中文术语不会被硬性要求解释。
 - 默认开启会给每个请求多带约 590 token。
 
-## 开发
+## 仓库内容
 
-```sh
-node scripts/smoke.mjs     # 校验器、路由、状态、词表、两阶段规则
-node scripts/bench.mjs     # 开/关基准，写入 scripts/bench-result.json
-```
-
-`lib/client.js` 是手写的浏览器半，随包提交，用户端不需要构建。
+仓库只保留运行与文档文件：`dsh/`（宿主端）、`lib/`（浏览器端）、`cordis.patch.yml`、`locale/`、`icon.svg`、两份 README、`CHANGELOG.md`、`LICENSE`、`package.json`。测试脚本、基准数据、截图与本地调试文件不提交，也不进 npm 包。
 
 ## 发布到 npm
 
 README 会直接显示在 npm 包页面，所以发布前检查这几件事：
 
-1. `package.json` 的 `files` 只放运行必需：`dsh/`、`lib/`、`cordis.patch.yml`、`locale/`、`icon.svg`、`README*.md`、`CHANGELOG.md`、`LICENSE`。`scripts/` 与截图不进包。
+1. `package.json` 的 `files` 只放运行必需：`dsh/`、`lib/`、`cordis.patch.yml`、`locale/`、`icon.svg`、`README*.md`、`CHANGELOG.md`、`LICENSE`。测试脚本、截图与基准数据不进包。
 2. 图片用 raw 绝对链接（`https://raw.githubusercontent.com/lizilong1993/dsh-plain-talk/main/...`），否则 npm 页面不显示；不要把大图塞进 `files`。
 3. 预构建产物随包提交（本项目的 `lib/client.js` 是手写文件），用户端不跑构建脚本。
 4. 发布前核对包装内容与体积：

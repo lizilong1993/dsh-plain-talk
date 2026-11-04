@@ -97,7 +97,7 @@ Off: 144 chars. On: 189 chars, but the first line is a verdict ("已达标") and
 - Output tokens fell in two scenarios (−42%, −55%) and rose in one (+10%, one extra self-check round). **The plugin does not guarantee fewer tokens in every case.**
 - The rules section adds a fixed ~590 input tokens per step; the more turns, the more it costs.
 - A fourth scenario (survey) produced an invalid off arm: it stopped after 24 tool calls and returned 87 characters. It is excluded rather than spun.
-- Reproduce with `node scripts/bench.mjs`.
+- Reproduce by running the same model, prompt and workspace twice, switching the composer toggle between the runs; the vocabulary is cleared before each arm.
 
 ## Install
 
@@ -169,18 +169,13 @@ No profile config; only `PLAIN_TALK_DEFAULT=on|off`.
 - Code detection is heuristic: `M11`, `dev-1200`, `c590` are flagged; plain English project names and Chinese terms are not forced into glosses.
 - Mode on adds roughly 590 input tokens per step.
 
-## Development
+## Repository contents
 
-```sh
-node scripts/smoke.mjs
-node scripts/bench.mjs
-```
-
-`lib/client.js` is hand-written and committed, so users do not build anything.
+The repository keeps runtime and documentation only: `dsh/` (host), `lib/` (browser), `cordis.patch.yml`, `locale/`, `icon.svg`, both READMEs, `CHANGELOG.md`, `LICENSE`, `package.json`. Test scripts, benchmark data, screenshots and local debugging files are not committed and never enter the npm tarball.
 
 ## Publishing to npm
 
-1. Keep `files` to runtime needs only: `dsh/`, `lib/`, `cordis.patch.yml`, `locale/`, `icon.svg`, `README*.md`, `CHANGELOG.md`, `LICENSE`. `scripts/` and screenshots stay out.
+1. Keep `files` to runtime needs only: `dsh/`, `lib/`, `cordis.patch.yml`, `locale/`, `icon.svg`, `README*.md`, `CHANGELOG.md`, `LICENSE`. Test scripts, screenshots and benchmark data stay out.
 2. Use raw absolute URLs for README images (`https://raw.githubusercontent.com/lizilong1993/dsh-plain-talk/main/...`); a relative path does not render on npm.
 3. Ship the prebuilt client; users never run the build.
 4. Check the tarball before publishing:
