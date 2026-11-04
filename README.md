@@ -238,7 +238,7 @@ npm config set //registry.npmjs.org/:_authToken=<token>
 npm publish
 ```
 
-`files` 当前打出来是 **14 个文件 / 30.6 kB**（`npm pack --dry-run`，2026-11-04）；改动后重新核对，别让截图或测试数据混进去。
+`files` 当前打出来是 **14 个文件 / 30.9 kB**（`npm pack --dry-run`，2026-11-04）；改动后重新核对，别让截图或测试数据混进去。
 
 ## 收录到 awesome-dsh-plugin
 
