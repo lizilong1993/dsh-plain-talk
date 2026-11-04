@@ -1,6 +1,6 @@
 {
   "name": "dsh-plain-talk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Composer toggle that shapes replies: conclusion first, inline quotes, no cross-turn references",
   "type": "module",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "lib",
     "cordis.patch.yml",
     "locale/*.json",
-    "icon.svg",
+    "icon.png",
     "README.md",
     "README.en.md",
     "CHANGELOG.md",
@@ -38,7 +38,7 @@
     "./rules": "./dsh/rules.js",
     "./check": "./dsh/check.js",
     "./locale/*.json": "./locale/*.json",
-    "./icon": "./icon.svg",
+    "./icon": "./icon.png",
     "./package.json": "./package.json"
   },
   "engines": {
