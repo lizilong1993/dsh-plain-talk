@@ -43,12 +43,12 @@ Environment: DeepSeek Harness `desktop` profile, headless run, model `command co
 
 |Case|Characters (off / on)|Output tokens (off / on)|
 |-|-|-|
-|A1 Create and verify files|144 ➡ 189, 31.25%↑|2,333 ➡ 1,344, 42.39%↓|
-|A2 Write and read back|124 ➡ 238, 91.94%↑|220 ➡ 398, 80.91%↑|
-|B1 Why models forget|410 ➡ 350, 14.63%↓|732 ➡ 326, 55.46%↓|
-|B2 merge vs rebase|184 ➡ 194, 5.43%↑|150 ➡ 366, 144.00%↑|
-|C1 Experiment draft|558 ➡ 496, 11.11%↓|2,781 ➡ 3,066, 10.25%↑|
-|C2 Release-check draft|672 ➡ 331, 50.74%↓|1,636 ➡ 2,092, 27.87%↑|
+|A1 Create and verify files|144 → 189, 31.25%↑|2,333 → 1,344, 42.39%↓|
+|A2 Write and read back|124 → 238, 91.94%↑|220 → 398, 80.91%↑|
+|B1 Why models forget|410 → 350, 14.63%↓|732 → 326, 55.46%↓|
+|B2 merge vs rebase|184 → 194, 5.43%↑|150 → 366, 144.00%↑|
+|C1 Experiment draft|558 → 496, 11.11%↓|2,781 → 3,066, 10.25%↑|
+|C2 Release-check draft|672 → 331, 50.74%↓|1,636 → 2,092, 27.87%↑|
 
 About +589 input token per step.
 
