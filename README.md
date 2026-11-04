@@ -263,7 +263,7 @@ description:
 - 一个 PR 只加自己这一个文件，不手工编辑生成出来的 README，不改别人的条目。
 - 可选：`icon`（GitHub 托管的位图，作为市场卡片）与 `tarball`（预构建包）。
 
-本地预检（需要 `GITHUB_TOKEN`）：
+本地预检（在上游 `awesome-dsh-plugin` 仓库里执行，需要 `GITHUB_TOKEN`）：
 
 ```sh
 git clone https://github.com/awesome-dsh-plugin/awesome-dsh-plugin

@@ -214,7 +214,7 @@ Requirements:
 - Real, working code; accurate description, no marketing; quote a description that contains `: `.
 - One PR adds only that file; never edit the generated READMEs or another entry.
 
-Local pre-check (needs `GITHUB_TOKEN`):
+Local pre-check (run inside the upstream `awesome-dsh-plugin` repository; needs `GITHUB_TOKEN`):
 
 ```sh
 git clone https://github.com/awesome-dsh-plugin/awesome-dsh-plugin
