@@ -24,6 +24,7 @@ import { analyze, scanIdentifiers, isCommonTerm } from './check.js'
 import {
   CATEGORIES,
   addTerm,
+  isCodeLike,
   knownSet,
   listByCategory,
   loadVocab,
@@ -424,9 +425,12 @@ export function apply(ctx) {
       if (action === 'add') {
         const terms = (Array.isArray(args?.terms) ? args.terms : []).map((t) => String(t).trim()).filter(Boolean)
         if (terms.length === 0) return { ok: false, text: '没有要加入的词：给 terms 一个非空数组。' }
-        for (const term of terms) addTerm(userVocab, term, { session: sessionId, cwdName, source: 'manual' })
+        const kept = terms.filter((term) => !isCodeLike(term))
+        const skipped = terms.filter((t) => !kept.includes(t))
+        for (const term of kept) addTerm(userVocab, term, { session: sessionId, cwdName, source: 'manual' })
         saveVocab(vocabPath(), userVocab)
-        return { ok: true, text: `已加入 ${terms.length} 条：${terms.join('、')}` }
+        const note = skipped.length ? `；跳过代号 ${skipped.join('、')}（代号不进词表）` : ''
+        return { ok: kept.length > 0, text: `已加入 ${kept.length} 条：${kept.join('、') || '无'}${note}` }
       }
 
       if (action === 'remove') {
@@ -441,7 +445,10 @@ export function apply(ctx) {
         const term = String(args?.term ?? '').trim()
         const category = String(args?.category ?? '')
         if (!term || !CATEGORIES[category]) {
-          return { ok: false, text: '需要 term 和有效 category（common/domain/project/internal/unclassified）。' }
+          return { ok: false, text: `需要 term 和有效 category（${Object.keys(CATEGORIES).join(' / ')}）。` }
+        }
+        if (isCodeLike(term)) {
+          return { ok: false, text: `「${term}」是内部代号，不进入词汇清单；它每次出现都应按未知处理并解释。` }
         }
         if (!userVocab.terms[term]) addTerm(userVocab, term, { session: sessionId, cwdName, category, source: 'manual' })
         else setCategory(userVocab, term, category)

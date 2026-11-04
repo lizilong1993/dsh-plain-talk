@@ -8,9 +8,11 @@
 //   common        常识词汇 — built in, never needs an explanation
 //   domain        专业词汇 — field terms the user has already met
 //   project       项目 / 产品名 — repositories, products, workspace names
-//   internal      内部代号 — experiment ids, task numbers, build codes
 //   unclassified  待归类 — recorded but not yet classified
 //
+// Codes (EXP-7, DEV-1K, run-3, commit hashes) are never stored: the plugin's
+// job is to make the model explain them, so remembering one would hide the
+// next unexplainable use.
 // Two-phase learning for research requests: when the user says "调研 X", X is
 // marked pending for that Session, so the first reply must still explain it;
 // the next turn end promotes it into the vocabulary.
@@ -22,7 +24,6 @@ export const CATEGORIES = {
   common: '常识词汇',
   domain: '专业词汇',
   project: '项目 / 产品名',
-  internal: '内部代号',
   unclassified: '待归类',
 }
 
@@ -31,12 +32,20 @@ const MAX_PENDING_PER_SESSION = 20
 
 const cjkCount = (s) => (s.match(/[\u4e00-\u9fff]/g) ?? []).length
 
+// Codes never enter the vocabulary: explaining them is the plugin's job, so
+// remembering one would silence the next warning.
+const CODE_LIKE = /^[A-Za-z]{1,10}[-_.]?\d{1,6}[A-Za-z]?$|^\d{1,4}[A-Za-z]{1,6}$|^[0-9a-f]{7,40}$/i
+
+export function isCodeLike(term) {
+  return CODE_LIKE.test(String(term ?? '').trim())
+}
+
 /** Classify one learned term from its shape alone. */
 export function classify(term, cwdName) {
   const text = String(term ?? '').trim()
   if (!text) return 'unclassified'
+  if (isCodeLike(text)) return null
   if (cwdName && text === cwdName) return 'project'
-  if (/^[A-Za-z]{1,10}[-_.]?\d{1,6}$/.test(text)) return 'internal'
   if (/^[A-Za-z0-9]+(?:_[A-Za-z0-9]+)+$/.test(text) && (text.match(/[A-Z]/g) ?? []).length >= 2) return 'project'
   if (/^[A-Z][A-Za-z0-9]+$/.test(text) && /[A-Z]/.test(text.slice(1))) return 'project'
   if (cjkCount(text) >= 2) return 'domain'
@@ -55,7 +64,9 @@ export function loadVocab(file) {
     const raw = parsed && typeof parsed === 'object' && parsed.terms && typeof parsed.terms === 'object' ? parsed.terms : {}
     for (const [key, value] of Object.entries(raw)) {
       if (!key || key.length > 80) continue
+      if (isCodeLike(key)) continue
       if (!value || typeof value !== 'object') continue
+      if (value.category === 'internal') continue
       const category = Object.prototype.hasOwnProperty.call(CATEGORIES, value.category) ? value.category : 'unclassified'
       terms[key] = {
         category,
@@ -103,6 +114,9 @@ function evict(vocab) {
 export function addTerm(vocab, term, options = {}) {
   const key = String(term ?? '').trim()
   if (!key || key.length > 80) return vocab
+  if (isCodeLike(key)) return vocab
+  const category = options.category && CATEGORIES[options.category] ? options.category : classify(key, options.cwdName)
+  if (category === null) return vocab
   const now = options.now ?? new Date().toISOString()
   const session = typeof options.session === 'string' ? options.session : undefined
   const existing = vocab.terms[key]
@@ -113,7 +127,7 @@ export function addTerm(vocab, term, options = {}) {
     if (options.category && CATEGORIES[options.category]) existing.category = options.category
   } else {
     vocab.terms[key] = {
-      category: options.category && CATEGORIES[options.category] ? options.category : classify(key, options.cwdName),
+      category,
       firstSeen: now,
       lastSeen: now,
       count: 1,
@@ -132,7 +146,7 @@ export function removeTerm(vocab, term) {
 
 export function setCategory(vocab, term, category) {
   const key = String(term ?? '').trim()
-  if (!vocab.terms[key] || !CATEGORIES[category]) return vocab
+  if (!vocab.terms[key] || !CATEGORIES[category] || isCodeLike(key)) return vocab
   vocab.terms[key].category = category
   return vocab
 }

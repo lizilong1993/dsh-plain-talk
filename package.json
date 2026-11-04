@@ -1,6 +1,6 @@
 {
   "name": "dsh-plain-talk",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Composer toggle that shapes replies: conclusion first, inline quotes, no cross-turn references",
   "type": "module",
   "license": "MIT",
