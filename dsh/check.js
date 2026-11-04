@@ -5,7 +5,7 @@
 //
 // Three principles learned from real sessions in this workspace:
 //  - Common terms and project names are not errors. Only opaque codes the
-//    reader has never seen (M11, dev-1200, c590) need a first-use gloss.
+//    reader has never seen (EXP-7, DEV-1K, run-3) need a first-use gloss.
 //  - A pointer is not a citation: `file.py:42` alone sends the reader away.
 //  - Cross-turn wording ("上述", "上一轮") is the main reason a report cannot
 //    be read on its own.
@@ -106,7 +106,7 @@ function isAllowed(token, known) {
   if (MODEL_FAMILY.test(token)) return true
   // Durations and multipliers ("10m", "3s", "4x") are measurements, not names.
   if (/^\d+(?:ms|s|m|h|d|w|k|m|b|x)$/i.test(token)) return true
-  // Product-style names (MechDW_V1, GeoEvidence_V2) are project vocabulary the
+  // Product-style names (AcmeService_V2, DataHub_V3) are project vocabulary the
   // reader already holds; a lower-case internal key (tier_reaudit) is not.
   if (/^[A-Za-z0-9]+(?:_[A-Za-z0-9]+)+$/.test(token) && (token.match(/[A-Z]/g) ?? []).length >= 2) return true
   if (known && (known.has(token) || known.has(lower))) return true
@@ -190,7 +190,7 @@ export function analyze(draft, options = {}) {
       'warn',
       'identifier',
       `有 ${unknown.length} 个代号没有说明：${unknown.slice(0, 6).join('、')}${unknown.length > 6 ? ' 等' : ''}。`,
-      '第一次出现写成「M11（一句话说明它是什么）」；用户在本对话用过的词和项目名不用解释。',
+      '第一次出现写成「EXP-7（一句话说明它是什么）」；用户在本对话用过的词和项目名不用解释。',
     )
   }
 
