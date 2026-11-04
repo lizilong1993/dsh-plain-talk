@@ -1,7 +1,7 @@
 # dsh-plain-talk（说人话）
 
 <p align="center">
-  <img src="icon.svg" alt="dsh-plain-talk" width="72" height="72">
+  <img src="https://raw.githubusercontent.com/lizilong1993/dsh-plain-talk/main/icon.svg" alt="dsh-plain-talk" width="72" height="72">
 </p>
 
 <p align="center">
