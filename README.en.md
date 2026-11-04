@@ -70,9 +70,9 @@ Restart DSH after installing.
 ## Use
 
 1. Open any session; a smiley speech-bubble icon appears to the right of the permission selector in the composer.
-2. On: the smiley has three sound waves on its right and an open smile; off: the smile version without waves. Click to toggle, affecting only the current session.
+2. Off by default (plain smile); one click turns it into the open smile with three sound waves, meaning this session is on. Affects only the current session.
 3. State is written to `$DSH_HOME/plain-talk.json` and survives a restart.
-4. To make new sessions start off: set `PLAIN_TALK_DEFAULT=off` in the launch environment.
+4. To make new sessions start on: set `PLAIN_TALK_DEFAULT=on` in the launch environment.
 
 ## Vocabulary
 
@@ -113,7 +113,7 @@ Only `$DSH_HOME/plain-talk.json` and `$DSH_HOME/plain-talk-vocab.json` are writt
 
 ## Configuration
 
-Only the environment variable `PLAIN_TALK_DEFAULT` (`on` / `off`, default `on`).
+Only the environment variable `PLAIN_TALK_DEFAULT` (`on` / `off`, default `off`).
 
 ## Notes
 

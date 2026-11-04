@@ -70,9 +70,9 @@ dsh plugin --profile desktop add ./dsh-plain-talk
 ## 使用
 
 1. 打开任意会话，输入框权限选择器右侧会多一个笑脸气泡图标。
-2. 开启时笑脸右侧带三道声波、张嘴笑；关闭时是不带声波的微笑版。点一下切换，只影响当前会话。
+2. 默认关闭（微笑版）；点一下变成带三道声波的张嘴笑脸，表示当前会话已开启。只影响当前会话。
 3. 状态写在 `$DSH_HOME/plain-talk.json`，重启后保持。
-4. 想让新会话默认关闭：启动环境里设 `PLAIN_TALK_DEFAULT=off`。
+4. 想让新会话默认开启：启动环境里设 `PLAIN_TALK_DEFAULT=on`。
 
 ## 词汇清单
 
@@ -113,14 +113,14 @@ dsh plugin --profile desktop add ./dsh-plain-talk
 
 ## 配置
 
-只有环境变量 `PLAIN_TALK_DEFAULT`（`on` / `off`，默认 `on`）。
+只有环境变量 `PLAIN_TALK_DEFAULT`（`on` / `off`，默认 `off`）。
 
 ## 注意
 
 * 按钮位置依赖 `conversation.input.left`，宿主改版后可能移到其它左侧控件旁。
 * 规则是提示词约束，`plain_talk_check` 只提醒、不拦截发送。
 * 词表按用户共享，不按项目隔离。
-* 默认开启时每个请求多约 590 input token。
+* 开启时每个请求多约 590 input token。
 
 ## 许可
 

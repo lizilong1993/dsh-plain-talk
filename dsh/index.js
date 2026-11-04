@@ -52,10 +52,9 @@ const ROUTE_STATE = '/plain-talk/state'
 const MAX_BODY = 8 * 1024
 const MAX_SESSIONS = 256
 
-/** New Sessions start with the mode on; a click records an explicit choice.
- *  PLAIN_TALK_DEFAULT=off makes unseen Sessions start off (benchmarks and
- *  opt-in setups); any click still records an explicit per-Session choice. */
-const DEFAULT_ON = String(process.env.PLAIN_TALK_DEFAULT ?? 'on').toLowerCase() !== 'off'
+/** New Sessions start off; one click turns the mode on and records that choice.
+ *  PLAIN_TALK_DEFAULT=on makes unseen Sessions start on. */
+const DEFAULT_ON = String(process.env.PLAIN_TALK_DEFAULT ?? 'off').toLowerCase() === 'on'
 
 function dshHome() {
   return process.env.DSH_HOME && process.env.DSH_HOME.length > 0
