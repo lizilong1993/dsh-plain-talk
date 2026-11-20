@@ -1,5 +1,4 @@
-// 离线自检：不需要模型网关。校验规则正文的契约与检查器行为。
-// 重点防回归：0.1.11 曾把新旧条款并列写进同一份规则，导致自相矛盾、回复变长。
+// 离线自检：不需要模型网关。校验规则正文契约与检查器行为。
 import fs from 'node:fs';
 import path from 'node:path';
 import { analyze } from '../dsh/check.js';
@@ -18,32 +17,35 @@ const check = (name, cond, detail = '') => {
   else fails.push(name + (detail ? ' :: ' + detail : ''));
 };
 const rulesOf = (t) => analyze(t, { language: 'zh' }).issues.map((x) => x.rule);
-const countOf = (needle) => body.split(needle).length - 1;
 
 // 1. 文件与声明
 check('declaration', /export const RULES = `/.test(rulesSrc));
 check('body not empty', body.trim().length > 500, 'len=' + body.length);
 
-// 2. 长度与列表必须有确定的硬上限（这是实测能压住篇幅的关键）
-check('has line/char cap', body.includes('默认不超过 12 行、300 字'));
-check('has list cap', body.includes('列表最多 5 条'));
+// 2. 篇幅：不设硬上限，但必须禁止"为短漏步骤"和"为长注水"
+check('no hard cap', !body.includes('默认不超过 12 行') && !body.includes('300 字'));
+check('no hard cap duplicated', body.split('12 行、300 字').length - 1 === 0);
+check('forbids dropping steps for brevity', body.includes('别为短漏关键步骤'));
+check('forbids padding', body.includes('别为长注水'));
+check('conclusion stays first line', body.includes('结论始终在第一行'));
 
-// 3. 不许自相矛盾：同一约束只能有一种说法
-const capVariants = ['默认不超过 12 行、300 字', '普通回复以 12 行、300 字以内为参考'];
-check('one length cap only', capVariants.filter((v) => body.includes(v)).length === 1,
-  JSON.stringify(capVariants.map((v) => [v, countOf(v)])));
-const listVariants = ['列表最多 5 条；只给一个下一步', '用列表呈现并列项，按需保留完整条目'];
-check('one list rule only', listVariants.filter((v) => body.includes(v)).length === 1);
-check('no expand-anything clause', !body.includes('按任务需要展开'));
+// 3. 信息不足时先要，不猜；有可执行替代才给命令
+check('asks for missing input', body.includes('信息不够就直说缺什么'));
+check('no guessing', body.includes('别猜'));
+check('gives runnable alternative', body.includes('命令给出来'));
 
-// 4. 原有硬性禁令仍在
+// 4. 清单一条一件事
+check('one item per line', body.includes('一条一件事'));
+check('caps list at five', body.includes('最多 5 条'));
+
+// 5. 原有硬性禁令仍在
 check('bans preamble', body.includes('希望这有帮助'));
 check('bans process diary', body.includes('我先…然后…'));
 check('bans backref', body.includes('前者') || body.includes('上述'));
 check('keeps evidence rule', body.includes('原文'));
 check('has checklist call', body.includes('plain_talk_check'));
 
-// 5. 检查器行为（不依赖模型，只验证它按预期抓问题）
+// 6. 检查器行为
 const zhLong = '这是一段用来测试长度规则的中文内容，'.repeat(20);
 check('flags length', rulesOf(zhLong).includes('length'));
 check('flags preamble', rulesOf('好的，我来看看。' + zhLong).includes('preamble'));
