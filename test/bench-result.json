@@ -1,0 +1,281 @@
+{
+  "summary": {
+    "versions": [
+      "0.1.10",
+      "0.1.11"
+    ],
+    "reps": 1,
+    "questions": 12,
+    "runs": 24,
+    "model": "group/free",
+    "arms": {
+      "0.1.10": {
+        "n": 12,
+        "avgChars": 345,
+        "avgLines": 5.9,
+        "errors": 0,
+        "warns": 10
+      },
+      "0.1.11": {
+        "n": 12,
+        "avgChars": 381,
+        "avgLines": 7.7,
+        "errors": 2,
+        "warns": 15
+      }
+    },
+    "pairs": {
+      "0.1.10/0.1.11": {
+        "n": 12,
+        "charsDelta": 434,
+        "warnsDelta": 5,
+        "shorter": 4,
+        "longer": 7,
+        "avgCharsDelta": 36,
+        "avgWarnsDelta": 0.42
+      }
+    }
+  },
+  "rows": [
+    {
+      "q": 1,
+      "rep": 1,
+      "version": "0.1.10",
+      "chars": 666,
+      "lines": 10,
+      "errors": 0,
+      "warns": 2,
+      "firstLine": "**Liveness Probe（存活探针）**：判断容器是否**还活着**。失败 → kubelet **杀掉并重启*"
+    },
+    {
+      "q": 1,
+      "rep": 1,
+      "version": "0.1.11",
+      "chars": 963,
+      "lines": 30,
+      "errors": 0,
+      "warns": 2,
+      "firstLine": "一句话：liveness 探针决定\"要不要重启容器\"，readiness 探针决定\"要不要把流量发给这个 Pod\"。"
+    },
+    {
+      "q": 2,
+      "rep": 1,
+      "version": "0.1.10",
+      "chars": 346,
+      "lines": 9,
+      "errors": 0,
+      "warns": 0,
+      "firstLine": "被拒绝是因为远程分支有本地没有的提交，直接推送会覆盖远程提交，Git 拒绝以防丢数据。"
+    },
+    {
+      "q": 2,
+      "rep": 1,
+      "version": "0.1.11",
+      "chars": 143,
+      "lines": 1,
+      "errors": 0,
+      "warns": 0,
+      "firstLine": "因为远端分支上有你本地没有的提交，导致推送会使历史出现非快进（non‑fast‑forward），git 为防止意外覆盖"
+    },
+    {
+      "q": 3,
+      "rep": 1,
+      "version": "0.1.10",
+      "chars": 28,
+      "lines": 1,
+      "errors": 0,
+      "warns": 0,
+      "firstLine": "它只在组件首次渲染时运行一次。后续的重新渲染不会触发它。"
+    },
+    {
+      "q": 3,
+      "rep": 1,
+      "version": "0.1.11",
+      "chars": 339,
+      "lines": 4,
+      "errors": 0,
+      "warns": 1,
+      "firstLine": "在 React 的 `useEffect` 中，如果你把第二个参数（依赖数组）留空，或者写成 `undefined`，它"
+    },
+    {
+      "q": 4,
+      "rep": 1,
+      "version": "0.1.10",
+      "chars": 214,
+      "lines": 6,
+      "errors": 0,
+      "warns": 1,
+      "firstLine": "MySQL 索引失效的常见原因有以下几类。  "
+    },
+    {
+      "q": 4,
+      "rep": 1,
+      "version": "0.1.11",
+      "chars": 408,
+      "lines": 9,
+      "errors": 0,
+      "warns": 2,
+      "firstLine": "MySQL 索引失效的常见原因："
+    },
+    {
+      "q": 5,
+      "rep": 1,
+      "version": "0.1.10",
+      "chars": 201,
+      "lines": 3,
+      "errors": 0,
+      "warns": 1,
+      "firstLine": "**结论**：这行日志说明进程因为内存耗尽而被操作系统强制杀掉（OOMKilled），对应的退出码是 137，即 SIG"
+    },
+    {
+      "q": 5,
+      "rep": 1,
+      "version": "0.1.11",
+      "chars": 556,
+      "lines": 9,
+      "errors": 0,
+      "warns": 2,
+      "firstLine": "OOMKilled exit code 137 means the process was killed by the "
+    },
+    {
+      "q": 6,
+      "rep": 1,
+      "version": "0.1.10",
+      "chars": 71,
+      "lines": 1,
+      "errors": 0,
+      "warns": 0,
+      "firstLine": "第一步：运行 `vue-upgrade` 命令扫描你的 Vue 2 项目，它会生成一份报告，列出需要手动修复的兼容性问题"
+    },
+    {
+      "q": 6,
+      "rep": 1,
+      "version": "0.1.11",
+      "chars": 524,
+      "lines": 11,
+      "errors": 0,
+      "warns": 1,
+      "firstLine": "**第一步：跑通 `vue-migration-build`（迁移构建版），把所有兼容模式警告清零。**"
+    },
+    {
+      "q": 7,
+      "rep": 1,
+      "version": "0.1.10",
+      "chars": 420,
+      "lines": 9,
+      "errors": 0,
+      "warns": 1,
+      "firstLine": "结论：WebAssembly 目前最适合浏览器内的计算密集型任务，以及服务器端的轻量级沙箱与插件扩展；不适合替代 Jav"
+    },
+    {
+      "q": 7,
+      "rep": 1,
+      "version": "0.1.11",
+      "chars": 420,
+      "lines": 7,
+      "errors": 0,
+      "warns": 2,
+      "firstLine": "WebAssembly（Wasm）当前最适合以下场景："
+    },
+    {
+      "q": 8,
+      "rep": 1,
+      "version": "0.1.10",
+      "chars": 803,
+      "lines": 7,
+      "errors": 0,
+      "warns": 1,
+      "firstLine": "按可能性从高到低排查："
+    },
+    {
+      "q": 8,
+      "rep": 1,
+      "version": "0.1.11",
+      "chars": 98,
+      "lines": 1,
+      "errors": 0,
+      "warns": 1,
+      "firstLine": "CPU 100%可能性从高到低排序：1.后台进程/服务异常 2.恶意软件/病毒 3.驱动程序冲突/过时 4.应用程序死循"
+    },
+    {
+      "q": 9,
+      "rep": 1,
+      "version": "0.1.10",
+      "chars": 394,
+      "lines": 8,
+      "errors": 0,
+      "warns": 1,
+      "firstLine": "Postgres VACUUM 必须定期运行，因为它会回收已删除的行（dead tuple）、更新统计信息、防止表膨胀并"
+    },
+    {
+      "q": 9,
+      "rep": 1,
+      "version": "0.1.11",
+      "chars": 434,
+      "lines": 6,
+      "errors": 0,
+      "warns": 2,
+      "firstLine": "PostgreSQL 的 **VACUUM**（或自动化的 `autovacuum`）每隔一段时间运行，是为了清理死数据"
+    },
+    {
+      "q": 10,
+      "rep": 1,
+      "version": "0.1.10",
+      "chars": 61,
+      "lines": 2,
+      "errors": 0,
+      "warns": 0,
+      "firstLine": "没收到要修改的 SQL，所以没法给出改后的索引版本。"
+    },
+    {
+      "q": 10,
+      "rep": 1,
+      "version": "0.1.11",
+      "chars": 22,
+      "lines": 1,
+      "errors": 0,
+      "warns": 0,
+      "firstLine": "请把 SQL 贴过来，我直接给你改好的版本。"
+    },
+    {
+      "q": 11,
+      "rep": 1,
+      "version": "0.1.10",
+      "chars": 232,
+      "lines": 3,
+      "errors": 0,
+      "warns": 1,
+      "firstLine": "**502 Bad Gateway**：Nginx 作为代理，从上游服务器（比如后端应用、PHP-FPM）收到了一个它认"
+    },
+    {
+      "q": 11,
+      "rep": 1,
+      "version": "0.1.11",
+      "chars": 619,
+      "lines": 9,
+      "errors": 1,
+      "warns": 1,
+      "firstLine": "**502 Bad Gateway**：Nginx 作为反向代理，成功连上了上游，但上游返回的响应**不合法或无法解析*"
+    },
+    {
+      "q": 12,
+      "rep": 1,
+      "version": "0.1.10",
+      "chars": 707,
+      "lines": 12,
+      "errors": 0,
+      "warns": 2,
+      "firstLine": "**结论**：OpenTelemetry 通过统一标准和生态，能将埋点接入成本从“每个项目自建”降低到“统一接入”，适合"
+    },
+    {
+      "q": 12,
+      "rep": 1,
+      "version": "0.1.11",
+      "chars": 51,
+      "lines": 4,
+      "errors": 1,
+      "warns": 1,
+      "firstLine": "{"
+    }
+  ]
+}
