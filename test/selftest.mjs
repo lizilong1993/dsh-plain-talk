@@ -25,6 +25,7 @@ check('body not empty', body.trim().length > 500, 'len=' + body.length);
 // 2. 篇幅：不设硬上限，但必须禁止"为短漏步骤"和"为长注水"
 check('no hard cap', !body.includes('默认不超过 12 行') && !body.includes('300 字'));
 check('no hard cap duplicated', body.split('12 行、300 字').length - 1 === 0);
+check('no line-count threshold anywhere', !body.includes('12 行'));
 check('forbids dropping steps for brevity', body.includes('别为短漏关键步骤'));
 check('forbids padding', body.includes('别为长注水'));
 check('conclusion stays first line', body.includes('结论始终在第一行'));
